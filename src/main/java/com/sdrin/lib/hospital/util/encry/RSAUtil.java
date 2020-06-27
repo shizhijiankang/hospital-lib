@@ -15,6 +15,7 @@ limitations under the License.
  */
 package com.sdrin.lib.hospital.util.encry;
 
+import com.sdrin.lib.hospital.domain.RSAKeyType;
 import com.sdrin.lib.hospital.domain.SHttpRequest;
 import com.sdrin.lib.hospital.domain.SHttpResponse;
 import org.bouncycastle.asn1.ASN1Encodable;
@@ -62,9 +63,6 @@ public class RSAUtil {
     public static final String PRIVATE_KEY = "privateKey";
     public static final String PRIVATE_KEY_PKCS8 = "privateKeyPkcs8";
     public static final int ALGORITHM_RSA_PRIVATE_KEY_LENGTH = 2048;
-    public static final String PUBLIC_KEY_DESCRIPTION = "PUBLIC KEY";
-    public static final String PRIVATE_KEY_DESCRIPTION = "RSA PRIVATE KEY";// pkcs1
-    public static final String PRIVATE_KEY_DESCRIPTION_PKCS8 = "PRIVATE KEY";
     public static final String PUBLIC_KEY_FILENAME = "rsa_public_key.pem";
     public static final String PRIVATE_KEY_FILENAME = "rsa_private_key.pem";// pkcs1
     public static final String PRIVATE_KEY_FILENAME_PKCS8 = "rsa_public_key_pkcs8.pem";
@@ -418,13 +416,13 @@ public class RSAUtil {
     /**
      * 将rsa key 写入临时文件，便于服务器将文件返回给浏览器前台。
      *
-     * @param key         rsa key，包含3种key，公钥，私钥，pkcs8
-     * @param description 描述。
-     * @param path        保存的本地目录
+     * @param key        rsa key，包含3种key，公钥，私钥，pkcs8
+     * @param rsaKeyType 三种key类型。
+     * @param path       保存的本地目录
      * @return 返回文件的路径。
      */
-    private static Path writePemFile(Key key, String description, Path path) {
-        PemObject pemObject = new PemObject(description, key.getEncoded());
+    public static Path writePemFile(Key key, RSAKeyType rsaKeyType, Path path) {
+        PemObject pemObject = new PemObject(rsaKeyType.toDescription(), key.getEncoded());
 
         try {
             if (!Files.exists(path.getParent()))
@@ -439,4 +437,6 @@ public class RSAUtil {
         }
         return null;
     }
+
+
 }
