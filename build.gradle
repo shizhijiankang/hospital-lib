@@ -6,7 +6,7 @@ publish {
     userOrg = 'keryhu'// bintray 账户名。
     groupId = 'com.sdrin.lib'
     artifactId = 'hospital-lib'
-    publishVersion = '1.0.5'
+    publishVersion = '1.0.6'
     desc = '上海石指健康医院公共库'
     website = 'https://github.com/keryhu/hospital-lib'
 }
@@ -35,10 +35,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.apache.httpcomponents:httpclient:4.5.12"
     implementation "org.bouncycastle:bcpkix-jdk15on:1.65"
-    implementation "com.google.code.gson:gson:2.8.6"
+
+    // json
+    implementation(enforcedPlatform('com.fasterxml.jackson:jackson-bom:2.11.1'))
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
-    testImplementation "com.google.code.gson:gson:2.8.6"
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind'
+
 }
 configurations {
     compileOnly {
@@ -93,5 +100,5 @@ javadoc {
     }
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

@@ -1,8 +1,8 @@
 package com.sdrin.lib.hospital.util.encry;
 
-import com.google.gson.Gson;
 import com.sdrin.lib.hospital.domain.SHttpRequest;
 import com.sdrin.lib.hospital.domain.SHttpResponse;
+import com.sdrin.lib.hospital.util.json.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -48,8 +48,7 @@ class RSAUtilTest {
         Map<String, Object> bizContent = new HashMap<>();
         bizContent.put("name", "name");
         bizContent.put("value", 1);
-        Gson gson = new Gson();
-        SHttpRequest request = new SHttpRequest("appId123", gson.toJson(bizContent), false);
+        SHttpRequest request = new SHttpRequest("appId123", JsonUtil.toJson(bizContent), false);
         RSAUtil.sign(request, privateKeyPkcs8);
         System.out.println(request);
         assertTrue(RSAUtil.verify(request, publicKey));
@@ -60,8 +59,7 @@ class RSAUtilTest {
         Map<String, Object> bizContent = new HashMap<>();
         bizContent.put("name", "name");
         bizContent.put("value", 1);
-        Gson gson = new Gson();
-        SHttpResponse response = new SHttpResponse("10001", "err", gson.toJson(bizContent));
+        SHttpResponse response = new SHttpResponse("10001", "err", JsonUtil.toJson(bizContent));
         RSAUtil.sign(response, privateKeyPkcs8);
         System.out.println(response);
         assertTrue(RSAUtil.verify(response, publicKey));
