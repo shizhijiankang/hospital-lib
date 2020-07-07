@@ -29,22 +29,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author 胡树铭
  */
 class DepartmentCodeUtilTest {
+    private String departmentPath = "/科室编码/department-code.txt";
 
     @Test
     void getDepCodeFromLocalResource() {
-        Arrays.stream(DepartmentCodeUtil.getAllDepCode())
+        Arrays.stream(DepartmentCodeUtil.getAllDepCode(departmentPath))
                 .forEach(System.out::println);
     }
 
     @Test
     void getDeepNameByCode() {
-        assertEquals(DepartmentCodeUtil.getDepNameByCode("0100"), "内科");
-        assertEquals(DepartmentCodeUtil.getDepNameByCode("0101"), "心血管内科");
+        assertEquals(DepartmentCodeUtil.getDepNameByCode(departmentPath, "0100"), "内科");
+        assertEquals(DepartmentCodeUtil.getDepNameByCode(departmentPath, "0101"), "心血管内科");
     }
 
     @Test
     void getAllSecondDepCodes() {
-        assertTrue(Arrays.stream(DepartmentCodeUtil.getAllSecondDepCodes())
+        assertTrue(Arrays.stream(DepartmentCodeUtil.getAllSecondDepCodes(departmentPath))
                 .noneMatch(e -> e.endsWith("00")));
     }
 }

@@ -29,21 +29,24 @@ import java.util.stream.Stream;
 /**
  * 上海石指(健康)科技有限公司 sdrin.com 2020/7/5 10:49 上午
  * <p>
- * 医院签到的工具, 参考： <a href="http://simulate-his.sdrin.com/docs/index.html#_3_签到处编码">签到处编码</a>
+ * 设备放置处的编码工具, 参考： "http://simulate-his.sdrin.com/docs/index.html#_3_设备放置处编码"
  *
  * @author 胡树铭
  */
-public class CheckCodeUtil {
+public class PositionCodeUtil {
     /**
      * 因为签到的编码包含了 科室的编码，所以这里进行整合。
      * 从本地 resource 里，读取科室配置文本，都在目录 /resource/签到/**.txt 里面，
      *
+     * @param positionCodePath   txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/签到/check-code.txt ,
+     *                           传递的参数是：/签到/check-code.txt
+     * @param departmentCodePath 与上面对于，此为挂号的科室编码文件路径
      * @return 返回全部的编码数据
      */
-    public static CodeValueItem[] getAllCheckCode() {
+    public static CodeValueItem[] getAllPositionCode(String positionCodePath, String departmentCodePath) {
         List<CodeValueItem> checkCodeList;
         // 先获取签到编码的数据
-        InputStream in = CheckCodeUtil.class.getResourceAsStream("/签到/check-code.txt");
+        InputStream in = PositionCodeUtil.class.getResourceAsStream(positionCodePath);
         if (in != null) {
             checkCodeList = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines()
                     .map(e -> {
@@ -52,27 +55,31 @@ public class CheckCodeUtil {
                     })
                     .collect(Collectors.toList());
             // 在添加科室编码，合成一起。
-            return Stream.concat(checkCodeList.stream(), Stream.of(DepartmentCodeUtil.getAllDepCode()))
+            return Stream.concat(checkCodeList.stream(), Stream.of(DepartmentCodeUtil.getAllDepCode(departmentCodePath)))
                     .toArray(CodeValueItem[]::new);
         }
         return null;
     }
 
+
     /**
      * 通过签到的 code，获取到对应的中文name
      *
-     * @param code 签到的code
+     * @param positionCodePath   txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/签到/check-code.txt ,
+     *                           传递的参数是：/签到/check-code.txt
+     * @param departmentCodePath 与上面对于，此为挂号的科室编码文件路径
+     * @param code               签到的code
      * @return 返回对应的中文name
      */
-    public static String getCheckNameByCode(String code) {
-        return Stream.of(getAllCheckCode())
+    public static String getPositionNameByCode(String positionCodePath, String departmentCodePath, String code) {
+        return Stream.of(getAllPositionCode(positionCodePath, departmentCodePath))
                 .filter(e -> e.getCode().equals(code))
                 .map(CodeValueItem::getValue)
                 .findAny()
                 .orElse(null);
     }
 
-    public static void main(String[] args) {
-        getAllCheckCode();
-    }
+//    public static void main(String[] args) {
+//        getAllCheckCode();
+//    }
 }

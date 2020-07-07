@@ -10,9 +10,9 @@ package com.sdrin.lib.hospital.domain;
  *
  * @author 胡树铭
  * <p>当查询科室，或者医生等数据时，需要编号和对应的中文的组合数据，所以此为最小的单位
- * 科室编码或签到处编码的基础类。
- * <a href="http://simulate-his.sdrin.com/docs/index.html#_1_科室表">科室编码</a>
- * <a href="http://simulate-his.sdrin.com/docs/index.html#_3_签到处编码">签到处编码</a>
+ * 科室编码或设备放置处编码的基础类。
+ * http://simulate-his.sdrin.com/docs/index.html#_1_科室表
+ * http://simulate-his.sdrin.com/docs/index.html#_3_设备放置处编码
  */
 public class CodeValueItem {
     /**

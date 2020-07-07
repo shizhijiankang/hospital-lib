@@ -36,11 +36,13 @@ public class DepartmentCodeUtil {
     /**
      * 从本地 resource 里，读取科室配置文本，都在目录 /resource/科室编号/**.txt 里面，
      *
+     * @param resourcePath txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/科室编码/department-code.txt ,
+     *                     传递的参数是：/科室编码/department-code.txt
      * @return 返回全部的编码数据
      */
-    public static CodeValueItem[] getAllDepCode() {
+    public static CodeValueItem[] getAllDepCode(String resourcePath) {
         // 总的科室编码的数据
-        InputStream in = DepartmentCodeUtil.class.getResourceAsStream("/科室编码/department-code.txt");
+        InputStream in = DepartmentCodeUtil.class.getResourceAsStream(resourcePath);
         if (in != null) {
             return new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines()
                     .map(e -> {
@@ -55,11 +57,13 @@ public class DepartmentCodeUtil {
     /**
      * 通过科室的 code，获取到对应的中文name
      *
-     * @param code 科室的code
+     * @param resourcePath txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/科室编码/department-code.txt ,
+     *                     传递的参数是：/科室编码/department-code.txt
+     * @param code         科室的code
      * @return 返回对应的中文name
      */
-    public static String getDepNameByCode(String code) {
-        return Stream.of(getAllDepCode())
+    public static String getDepNameByCode(String resourcePath, String code) {
+        return Stream.of(getAllDepCode(resourcePath))
                 .filter(e -> e.getCode().equals(code))
                 .map(CodeValueItem::getValue)
                 .findAny()
@@ -69,10 +73,12 @@ public class DepartmentCodeUtil {
     /**
      * 返回自定义的科室编码的，返回所有的二级科室的编码。
      *
+     * @param resourcePath txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/科室编码/department-code.txt ,
+     *                     传递的参数是：/科室编码/department-code.txt
      * @return 只返回二级科室的编码数据
      */
-    public static String[] getAllSecondDepCodes() {
-        return Stream.of(getAllDepCode())
+    public static String[] getAllSecondDepCodes(String resourcePath) {
+        return Stream.of(getAllDepCode(resourcePath))
                 .map(CodeValueItem::getCode)
                 .filter(e -> !e.endsWith("00"))
                 .toArray(String[]::new);
