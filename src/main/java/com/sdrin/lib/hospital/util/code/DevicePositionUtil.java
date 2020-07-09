@@ -33,20 +33,20 @@ import java.util.stream.Stream;
  *
  * @author 胡树铭
  */
-public class PositionCodeUtil {
+public class DevicePositionUtil {
     /**
-     * 因为签到的编码包含了 科室的编码，所以这里进行整合。
+     * 因为放置处的编码包含了 科室的编码，所以这里进行整合。
      * 从本地 resource 里，读取科室配置文本，都在目录 /resource/签到/**.txt 里面，
      *
-     * @param positionCodePath   txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/签到/check-code.txt ,
+     * @param devicePositionPath txt 的编码文件，code和name之间使用tab隔离。如 src/main/resource/签到/check-code.txt ,
      *                           传递的参数是：/签到/check-code.txt
      * @param departmentCodePath 与上面对于，此为挂号的科室编码文件路径
      * @return 返回全部的编码数据
      */
-    public static CodeValueItem[] getAllPositionCode(String positionCodePath, String departmentCodePath) {
+    public static CodeValueItem[] getAllPositionCode(String devicePositionPath, String departmentCodePath) {
         List<CodeValueItem> checkCodeList;
         // 先获取签到编码的数据
-        InputStream in = PositionCodeUtil.class.getResourceAsStream(positionCodePath);
+        InputStream in = DevicePositionUtil.class.getResourceAsStream(devicePositionPath);
         if (in != null) {
             checkCodeList = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines()
                     .map(e -> {

@@ -27,21 +27,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  * @author 胡树铭
  */
-class PositionCodeUtilTest {
+class DevicePositionUtilTest {
     private String positionPath = "/设备放置处/position-code.txt";
     private String departmentPath = "/科室编码/department-code.txt";
 
     @Test
     void getAllCheckCode() {
-        Arrays.stream(PositionCodeUtil.getAllPositionCode(positionPath, departmentPath))
+        Arrays.stream(DevicePositionUtil.getAllPositionCode(positionPath, departmentPath))
                 .forEach(System.out::println);
     }
 
     @Test
     void getCheckNameByCode() {
-        assertEquals(PositionCodeUtil.getPositionNameByCode(positionPath, departmentPath, "0100"), "内科");
-        assertEquals(PositionCodeUtil.getPositionNameByCode(positionPath, departmentPath, "0101"), "心血管内科");
-        assertEquals(PositionCodeUtil.getPositionNameByCode(positionPath, departmentPath, "9000"), "抽血");
+        assertEquals(DevicePositionUtil.getPositionNameByCode(positionPath, departmentPath, "0100"), "内科");
+        assertEquals(DevicePositionUtil.getPositionNameByCode(positionPath, departmentPath, "0101"), "心血管内科");
+        assertEquals(DevicePositionUtil.getPositionNameByCode(positionPath, departmentPath, "9000"), "抽血");
 
     }
 }

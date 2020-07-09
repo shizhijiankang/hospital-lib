@@ -29,6 +29,9 @@ public class CodeValueItem {
         this.value = value;
     }
 
+    public CodeValueItem() {
+    }
+
     public String getCode() {
         return code;
     }
