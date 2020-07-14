@@ -5,6 +5,8 @@
 package com.sdrin.lib.hospital.domain;
 
 
+import java.util.Objects;
+
 /**
  * 上海石指(健康)科技有限公司 sdrin.com 2020/2/5 10:45 下午
  *
@@ -13,6 +15,7 @@ package com.sdrin.lib.hospital.domain;
  * 科室编码或设备放置处编码的基础类。
  * http://simulate-his.sdrin.com/docs/index.html#_1_科室表
  * http://simulate-his.sdrin.com/docs/index.html#_3_设备放置处编码
+ * 另外 apiUrl的编码也可参考此。
  */
 public class CodeValueItem {
     /**
@@ -38,6 +41,20 @@ public class CodeValueItem {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CodeValueItem)) return false;
+        CodeValueItem that = (CodeValueItem) o;
+        return Objects.equals(getCode(), that.getCode()) &&
+                Objects.equals(getValue(), that.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCode(), getValue());
     }
 
     @Override
