@@ -138,6 +138,29 @@ public class RSAUtil {
     }
 
     /**
+     * 将pkcs8的私钥转为pkcs1的私钥。
+     *
+     * @param pkcs8PrivateKey 传入pkcs8私钥字节
+     * @return 返回pkcs1字节
+     */
+    public static byte[] convertPkcs8PrivateKeyToPkcs1(byte[] pkcs8PrivateKey) {
+        PrivateKeyInfo pkInfo = PrivateKeyInfo.getInstance(pkcs8PrivateKey);
+        ASN1Encodable encodable = null;
+        try {
+            encodable = pkInfo.parsePrivateKey();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        ASN1Primitive primitive = encodable.toASN1Primitive();
+        try {
+            return primitive.getEncoded();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 将字节形的公钥，转为java对象
      *
      * @param keyBytes 字节形的公钥
@@ -421,9 +444,8 @@ public class RSAUtil {
      * @param path       保存的本地目录
      * @return 返回文件的路径。
      */
-    public static Path writePemFile(Key key, RSAKeyType rsaKeyType, Path path) {
-        PemObject pemObject = new PemObject(rsaKeyType.toDescription(), key.getEncoded());
-
+    public static Path writePemFile(byte[] key, RSAKeyType rsaKeyType, Path path) {
+        PemObject pemObject = new PemObject(rsaKeyType.toDescription(), key);
         try {
             if (!Files.exists(path.getParent()))
                 Files.createDirectories(path.getParent());
