@@ -24,15 +24,14 @@ import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 import org.bouncycastle.util.encoders.Hex;
 import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemReader;
 import org.bouncycastle.util.io.pem.PemWriter;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -461,4 +460,31 @@ public class RSAUtil {
     }
 
 
+    /**
+     * 将pem文件，的公钥私钥，解析为 字节。
+     *
+     * @param pemFile pem文件。
+     * @return 返回字节。
+     */
+    public static byte[] parsePEMFile(File pemFile) {
+        PemReader reader = null;
+        try {
+            reader = new PemReader(new FileReader(pemFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        PemObject pemObject = null;
+        try {
+            pemObject = reader.readPemObject();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        byte[] content = pemObject.getContent();
+        try {
+            reader.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        return content;
+    }
 }
