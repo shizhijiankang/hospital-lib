@@ -52,9 +52,12 @@ public class SHttpResponse {
      */
     private String letter;
 
-    public SHttpResponse(String code, String msg, String bizContent) {
-        this.code = code;
-        this.msg = msg;
+    public SHttpResponse() {
+    }
+
+    public SHttpResponse(CommonApiResponseDto commonApiResponseDto, String bizContent) {
+        this.code = commonApiResponseDto.toCode();
+        this.msg = commonApiResponseDto.toChinese();
         this.bizContent = bizContent;
     }
 

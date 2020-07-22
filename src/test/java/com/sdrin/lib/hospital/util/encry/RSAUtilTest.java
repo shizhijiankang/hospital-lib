@@ -1,5 +1,6 @@
 package com.sdrin.lib.hospital.util.encry;
 
+import com.sdrin.lib.hospital.domain.CommonApiResponseDto;
 import com.sdrin.lib.hospital.domain.SHttpRequest;
 import com.sdrin.lib.hospital.domain.SHttpResponse;
 import com.sdrin.lib.hospital.util.json.JsonUtil;
@@ -59,7 +60,7 @@ class RSAUtilTest {
         Map<String, Object> bizContent = new HashMap<>();
         bizContent.put("name", "name");
         bizContent.put("value", 1);
-        SHttpResponse response = new SHttpResponse("10001", "err", JsonUtil.toJson(bizContent));
+        SHttpResponse response = new SHttpResponse(CommonApiResponseDto.ERR_APP_ID, JsonUtil.toJson(bizContent));
         RSAUtil.sign(response, privateKeyPkcs8);
         System.out.println(response);
         assertTrue(RSAUtil.verify(response, publicKey));

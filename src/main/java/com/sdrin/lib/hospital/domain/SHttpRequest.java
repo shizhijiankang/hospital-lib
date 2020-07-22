@@ -68,6 +68,9 @@ public class SHttpRequest {
      */
     private String version;
 
+    public SHttpRequest() {
+    }
+
     public SHttpRequest(String appId, String bizContent, boolean needEncrypt) {
         this.appId = appId;
         this.bizContent = bizContent;
