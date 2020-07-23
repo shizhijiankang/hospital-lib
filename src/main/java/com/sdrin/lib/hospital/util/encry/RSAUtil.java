@@ -31,7 +31,10 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -463,16 +466,11 @@ public class RSAUtil {
     /**
      * 将pem文件，的公钥私钥，解析为 字节。
      *
-     * @param pemFile pem文件。
+     * @param inputStreamReader pem文件。
      * @return 返回字节。
      */
-    public static byte[] parsePEMFile(File pemFile) {
-        PemReader reader = null;
-        try {
-            reader = new PemReader(new FileReader(pemFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public static byte[] parsePEMFile(InputStreamReader inputStreamReader) {
+        PemReader reader = new PemReader(inputStreamReader);
         PemObject pemObject = null;
         try {
             pemObject = reader.readPemObject();
