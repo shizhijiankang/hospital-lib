@@ -71,6 +71,15 @@ public class SHttpRequest {
     public SHttpRequest() {
     }
 
+    public SHttpRequest(String appId, boolean needEncrypt) {
+        this.appId = appId;
+        this.timestamp = DateTimeUtil.toString(LocalDateTime.now());
+        this.version = HTTP_VERSION;
+        if (needEncrypt)
+            this.encType = Constant.ENC_TYPE;
+        this.signType = Constant.SIGN_TYPE;
+    }
+
     public SHttpRequest(String appId, String bizContent, boolean needEncrypt) {
         this.appId = appId;
         this.bizContent = bizContent;
@@ -79,6 +88,10 @@ public class SHttpRequest {
         if (needEncrypt)
             this.encType = Constant.ENC_TYPE;
         this.signType = Constant.SIGN_TYPE;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
     public void setBizContent(String bizContent) {
