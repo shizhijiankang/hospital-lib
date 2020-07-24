@@ -35,7 +35,8 @@ public enum CommonApiResponseDto {
     ERR_VERSION,
     ERR_BIZ_CONTENT,
     ERR_LETTER,
-    ERR_ENC_TYPE;
+    ERR_ENC_TYPE,
+    OTHER;
 
     public String toCode() {
         switch (this) {
@@ -65,6 +66,8 @@ public enum CommonApiResponseDto {
                 return "20106";
             case ERR_ENC_TYPE:
                 return "20107";
+            case OTHER:
+                return "20900";
             default:
                 return null;
         }
@@ -98,6 +101,8 @@ public enum CommonApiResponseDto {
                 return "加密信封缺少或错误";
             case ERR_ENC_TYPE:
                 return "加密类型缺少或错误";
+            case OTHER:
+                return "";// 后续补充。
             default:
                 return null;
         }
