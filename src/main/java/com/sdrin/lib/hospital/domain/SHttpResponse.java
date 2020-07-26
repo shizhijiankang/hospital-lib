@@ -61,6 +61,12 @@ public class SHttpResponse {
         this.bizContent = bizContent;
     }
 
+    // 当错误内容是其他的时候，使用这个。
+    public SHttpResponse(String msg) {
+        this.msg = msg;
+        this.code = CommonApiResponseDto.OTHER.toCode();
+    }
+
     public void setBizContent(String bizContent) {
         this.bizContent = bizContent;
     }
