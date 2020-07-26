@@ -61,6 +61,12 @@ public class SHttpResponse {
         this.bizContent = bizContent;
     }
 
+    public SHttpResponse(CommonApiResponseDtoBack commonApiResponseDtoBack, String bizContent) {
+        this.code = commonApiResponseDtoBack.getCode();
+        this.msg = commonApiResponseDtoBack.getMsg();
+        this.bizContent = bizContent;
+    }
+
     public void setBizContent(String bizContent) {
         this.bizContent = bizContent;
     }
