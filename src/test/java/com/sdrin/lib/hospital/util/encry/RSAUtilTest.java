@@ -1,6 +1,5 @@
 package com.sdrin.lib.hospital.util.encry;
 
-import com.sdrin.lib.hospital.domain.CommonApiResponseDto;
 import com.sdrin.lib.hospital.domain.SHttpRequest;
 import com.sdrin.lib.hospital.domain.SHttpResponse;
 import com.sdrin.lib.hospital.util.json.JsonUtil;
