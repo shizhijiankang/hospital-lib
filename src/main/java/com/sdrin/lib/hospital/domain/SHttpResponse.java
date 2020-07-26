@@ -56,22 +56,15 @@ public class SHttpResponse {
     }
 
     public SHttpResponse(CommonApiResponseDto commonApiResponseDto, String bizContent) {
-        this.code = commonApiResponseDto.toCode();
-        this.msg = commonApiResponseDto.toChinese();
+        this.code = commonApiResponseDto.getCode();
+        this.msg = commonApiResponseDto.getMsg();
         this.bizContent = bizContent;
     }
 
-<<<<<<< HEAD
     // 当错误内容是其他的时候，使用这个。
     public SHttpResponse(String msg) {
         this.msg = msg;
-        this.code = CommonApiResponseDto.OTHER.toCode();
-=======
-    public SHttpResponse(CommonApiResponseDto commonApiResponseDtoBack, String bizContent) {
-        this.code = commonApiResponseDtoBack.getCode();
-        this.msg = commonApiResponseDtoBack.getMsg();
-        this.bizContent = bizContent;
->>>>>>> fffe6fc5711a1f31cdacec75e5030e79e88d8beb
+        this.code = CommonApiResponseDto.OTHER.getCode();
     }
 
     public void setBizContent(String bizContent) {
