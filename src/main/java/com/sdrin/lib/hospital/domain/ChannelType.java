@@ -26,6 +26,10 @@ import java.util.Objects;
  */
 public enum ChannelType {
 
+    APP("01", "APP"),
+    DEVICE("02", "设备"),
+    APPLETS("03", "小程序"),
+    OFFICIAL_ACCOUNT("04", "公众号"),
     UNTHOWN("99", "非正规渠道来源");
 
     /**
