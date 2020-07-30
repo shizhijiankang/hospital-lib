@@ -61,32 +61,6 @@ public class SHttpResponse {
         this.bizContent = bizContent;
     }
 
-    public SHttpResponse(String code, String msg, String sign, String bizContent, String letter) {
-        this.code = code;
-        this.msg = msg;
-        this.sign = sign;
-        this.bizContent = bizContent;
-        this.letter = letter;
-    }
-
-    public static SHttpResponse success(String sign, String bizContent, String letter) {
-        return new SHttpResponse(CommonApiResponseDto.OK.getCode(), CommonApiResponseDto.OK.getMsg(), sign, bizContent, letter);
-    }
-
-    public static SHttpResponse success() {
-        return success(null, null, null);
-    }
-
-    public static SHttpResponse error(String code, String msg) {
-        return new SHttpResponse(code, msg, null, null, null);
-    }
-
-    public static SHttpResponse error(CommonApiResponseDto commonApiResponseDto) {
-        return error(commonApiResponseDto.getCode(), commonApiResponseDto.getMsg());
-    }
-
-
-
     // 当错误内容是其他的时候，使用这个。
     public SHttpResponse(String msg) {
         this.msg = msg;
