@@ -51,7 +51,7 @@ public enum ChannelType {
         return code;
     }
 
-    public String getMsg() {
+    public String getValue() {
         return value;
     }
 

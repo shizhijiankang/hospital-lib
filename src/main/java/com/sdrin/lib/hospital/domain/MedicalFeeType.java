@@ -68,7 +68,7 @@ public enum MedicalFeeType {
         return code;
     }
 
-    public String getMsg() {
+    public String getValue() {
         return value;
     }
 
