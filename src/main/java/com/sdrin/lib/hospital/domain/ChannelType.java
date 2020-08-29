@@ -16,14 +16,18 @@
 
 package com.sdrin.lib.hospital.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Objects;
 
 /**
  * 上海石指(健康)科技有限公司 sdrin.com 2020/7/28 12:06 下午
  * 渠道类型，例如支付、挂号，充值等是通过哪个渠道完成的，
+ * json 返回值，可以返回 object类型。
  *
  * @author 胡树铭
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ChannelType {
 
     APP("01", "APP"),

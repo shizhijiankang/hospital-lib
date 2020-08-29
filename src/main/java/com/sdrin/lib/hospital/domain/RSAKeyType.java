@@ -16,12 +16,15 @@
 
 package com.sdrin.lib.hospital.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 上海石指(健康)科技有限公司 sdrin.com 2020/6/27 1:53 下午
  * rsa key 一共有此3种。
  *
  * @author 胡树铭
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum RSAKeyType {
     /**
      * 非java私钥

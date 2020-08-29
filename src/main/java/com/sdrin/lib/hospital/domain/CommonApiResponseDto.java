@@ -16,6 +16,8 @@
 
 package com.sdrin.lib.hospital.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Objects;
 
 /**
@@ -24,6 +26,8 @@ import java.util.Objects;
  *
  * @author 谢海波
  */
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CommonApiResponseDto {
     OK("10000", "接口调用成功"),
     FAIL("20000", "服务不可用"),
@@ -67,6 +71,7 @@ public enum CommonApiResponseDto {
 
     /**
      * 根据编码获取对应枚举类
+     *
      * @param code 码
      * @return 返回对象
      */

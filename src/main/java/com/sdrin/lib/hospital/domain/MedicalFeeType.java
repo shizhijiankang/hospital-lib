@@ -16,6 +16,8 @@
 
 package com.sdrin.lib.hospital.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Objects;
 
 /**
@@ -26,6 +28,7 @@ import java.util.Objects;
  *
  * @author 胡树铭
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum MedicalFeeType {
     // 下面是一般的门诊费用类别
     REGISTRATION_FEE("1000", "挂号费"),
