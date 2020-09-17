@@ -67,36 +67,44 @@ public class SHttpResponse {
         this.code = CommonApiResponseDto.OTHER.getCode();
     }
 
-    public void setBizContent(String bizContent) {
-        this.bizContent = bizContent;
+    public String getCode() {
+        return code;
     }
 
-    public void setSign(String sign) {
-        this.sign = sign;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void setLetter(String letter) {
-        this.letter = letter;
+    public String getMsg() {
+        return msg;
     }
 
-    public String getBizContent() {
-        return bizContent;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getSign() {
         return sign;
     }
 
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public String getBizContent() {
+        return bizContent;
+    }
+
+    public void setBizContent(String bizContent) {
+        this.bizContent = bizContent;
+    }
+
     public String getLetter() {
         return letter;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public String getMsg() {
-        return msg;
+    public void setLetter(String letter) {
+        this.letter = letter;
     }
 
     @Override

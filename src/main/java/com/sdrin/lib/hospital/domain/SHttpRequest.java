@@ -94,26 +94,6 @@ public class SHttpRequest {
         this.appId = appId;
     }
 
-    public void setBizContent(String bizContent) {
-        this.bizContent = bizContent;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public void setLetter(String letter) {
-        this.letter = letter;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
     public String getAppId() {
         return appId;
     }
@@ -122,28 +102,56 @@ public class SHttpRequest {
         return bizContent;
     }
 
+    public void setBizContent(String bizContent) {
+        this.bizContent = bizContent;
+    }
+
     public String getSignType() {
         return signType;
+    }
+
+    public void setSignType(String signType) {
+        this.signType = signType;
     }
 
     public String getSign() {
         return sign;
     }
 
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
     public String getEncType() {
         return encType;
+    }
+
+    public void setEncType(String encType) {
+        this.encType = encType;
     }
 
     public String getLetter() {
         return letter;
     }
 
+    public void setLetter(String letter) {
+        this.letter = letter;
+    }
+
     public String getTimestamp() {
         return timestamp;
     }
 
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getVersion() {
         return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     @Override
