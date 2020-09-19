@@ -49,7 +49,7 @@ class RSAUtilTest {
         Map<String, Object> bizContent = new HashMap<>();
         bizContent.put("name", "name");
         bizContent.put("value", 1);
-        SHttpRequest request = new SHttpRequest("appId123", JsonUtil.toJson(bizContent), false);
+        SHttpRequest request = new SHttpRequest("appId123", JsonUtil.toJson(bizContent), true, false);
         RSAUtil.sign(request, privateKeyPkcs8);
         System.out.println(request);
         assertTrue(RSAUtil.verify(request, publicKey));
