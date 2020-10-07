@@ -21,8 +21,8 @@ package com.sdrin.lib.hospital.domain;
  * 上海石指(健康)科技有限公司 sdrin.com 2020/6/7 1:01 下午
  * <p>
  * 在进行和上海石指慧眼系统进行交互时，强烈建议请求对象按照此对象，
- * 签名的规则：如果 {@link SHttpRequest#getSignType()} 为指定的类型,目前支持：SHA3+RSA2，则必须签名，否则报错
- * 加密的规则：如果 {@link SHttpRequest#getEncType()} 为指定的类型,目前支持：AES+RSA2，则必须加密，否则报错
+ * 签名的规则：如果 {@link SHttpRequest#getSignType()} ，则必须签名，否则报错
+ * 加密的规则：如果 {@link SHttpRequest#getEncType()} 则必须加密，否则报错
  * 如果需要rsa签名和加密，则此为返回的reponse body，
  * 可以参考：http://simulate-his.sdrin.com/docs/index.html#_4_数字签名和数据加密
  *

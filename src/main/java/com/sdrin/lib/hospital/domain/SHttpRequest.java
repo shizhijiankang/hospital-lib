@@ -21,14 +21,14 @@ import com.sdrin.lib.hospital.util.date.DateTimeUtil;
 
 import java.time.LocalDateTime;
 
-import static com.sdrin.lib.hospital.config.Constant.HTTP_VERSION;
+import static com.sdrin.lib.hospital.config.Constant.*;
 
 /**
  * 上海石指(健康)科技有限公司 sdrin.com 2020/6/7 1:01 下午
  * <p>
  * 在进行和上海石指慧眼系统进行交互时，强烈建议请求对象按照此对象，
- * 签名的规则：如果 {@link #signType} 为指定的类型,目前支持：SHA3+RSA2，则必须签名，否则报错
- * 加密的规则：如果 {@link #encType} 为指定的类型,目前支持：AES+RSA2，则必须加密，否则报错
+ * 签名的规则：如果 {@link #needSign()} ，则必须签名，否则报错
+ * 加密的规则：如果 {@link #needEncrypt()} 则必须加密，否则报错
  * 如果需要rsa签名和加密，则此为提交的request body，
  * 可以参考：http://simulate-his.sdrin.com/docs/index.html#_4_数字签名和数据加密
  *
@@ -93,6 +93,24 @@ public class SHttpRequest {
             this.encType = Constant.ENC_TYPE;
         if (needSign)
             this.signType = Constant.SIGN_TYPE;
+    }
+
+    /**
+     * 判断该对象是否需要签名，自定义的判断
+     *
+     * @return 需要则返回true
+     */
+    public boolean needSign() {
+        return this.signType != null && this.signType.equals(SIGN_TYPE);
+    }
+
+    /**
+     * 判断该对象是否需要加密，自定义的判断
+     *
+     * @return 需要则返回true
+     */
+    public boolean needEncrypt() {
+        return this.encType != null && this.encType.equals(ENC_TYPE);
     }
 
     public void setAppId(String appId) {

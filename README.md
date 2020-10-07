@@ -1,7 +1,7 @@
 # 上海石指健康医院接口官方库
 为了方便HIS厂商简化对接上海石指接口程序，特准备此接口。
 
-![Hex.pm](https://img.shields.io/hexpm/l/apa) [![Download](https://api.bintray.com/packages/keryhu/maven/hospital-lib/images/download.svg?version=1.0.28)](https://bintray.com/keryhu/maven/hospital-lib/1.0.28/link) [![Build Status](https://secure.travis-ci.org/xvik/generator-gradle-plugin.png)](https://travis-ci.org/xvik/generator-gradle-plugin)
+![Hex.pm](https://img.shields.io/hexpm/l/apa) [![Download](https://api.bintray.com/packages/keryhu/maven/hospital-lib/images/download.svg?version=1.0.29)](https://bintray.com/keryhu/maven/hospital-lib/1.0.29/link) [![Build Status](https://secure.travis-ci.org/xvik/generator-gradle-plugin.png)](https://travis-ci.org/xvik/generator-gradle-plugin)
 
 # 接口涵盖功能：
 1. 医疗就诊中的通用接口（如挂号、支付、刷脸就诊、刷脸支付等场景）。
@@ -20,14 +20,14 @@
 <dependency>
 	<groupId>com.sdrin.lib</groupId>
 	<artifactId>hospital-lib</artifactId>
-	<version>1.0.28</version>
+	<version>1.0.29</version>
 	<type>pom</type>
 </dependency>
 ```
 或gradle安装
 
 ```
-implementation 'com.sdrin.lib:hospital-lib:1.0.28'
+implementation 'com.sdrin.lib:hospital-lib:1.0.29'
 ```
 
 # 如有技术问题
