@@ -78,8 +78,4 @@ public class DevicePositionUtil {
                 .findAny()
                 .orElse(null);
     }
-
-//    public static void main(String[] args) {
-//        getAllCheckCode();
-//    }
 }

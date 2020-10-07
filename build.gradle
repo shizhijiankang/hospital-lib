@@ -6,13 +6,13 @@ publish {
     userOrg = 'keryhu'// bintray 账户名。
     groupId = 'com.sdrin.lib'
     artifactId = 'hospital-lib'
-    publishVersion = '1.0.26'
+    publishVersion = '1.0.27'
     desc = '上海石指健康医院公共库'
     website = 'https://github.com/keryhu/hospital-lib'
 }
 description = 'hospital-lib'
 group = 'com.sdrin.lib'
-version = '1.0.26'
+version = '1.0.27'
 
 buildscript {
     repositories {
@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'org.apache.commons:commons-lang3:3.10'
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
     testImplementation 'com.fasterxml.jackson.core:jackson-databind'
