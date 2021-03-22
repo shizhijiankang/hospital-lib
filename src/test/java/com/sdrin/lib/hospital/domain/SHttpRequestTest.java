@@ -17,6 +17,7 @@
 package com.sdrin.lib.hospital.domain;
 
 import com.sdrin.lib.hospital.config.Constant;
+import com.sdrin.lib.hospital.domain.http.SHttpRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

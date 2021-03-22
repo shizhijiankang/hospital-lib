@@ -16,14 +16,15 @@
 
 package com.sdrin.lib.hospital.util.encry;
 
-import com.sdrin.lib.hospital.domain.SHttpRequest;
-import com.sdrin.lib.hospital.domain.SHttpResponse;
+import com.sdrin.lib.hospital.domain.http.SHttpRequest;
+import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
- * 上海石指(健康)科技有限公司 sdrin.com 2020/10/6 10:59 下午
+ * 上海石指(健康)科技有限公司 sdrin.com 2021/1/3 20:46 下午
  * 这里是数字信封技术的工具，数字信封技术概念：https://blog.csdn.net/lycb_gz/article/details/78058747
  * 这里结合了：{@link AESUtil} 和 {@link RSAUtil}
+ * 兼容了c# 和 java
  * <p>
  * （1）甲使用对称密钥对明文进行加密，生成密文信息。
  * （2）甲使用乙的公钥加密对称密钥，生成数字信封。
@@ -82,7 +83,7 @@ public class DigitLetterUtil {
         // 解密得到：对称密钥。
         String symmetricKey = RSAUtil.decrypt(request.getLetter(), privateKey);
         // AES对称密钥进行解密，得到内容明文。
-        request.setBizContent(AESUtil.decryptTo(request.getBizContent(), symmetricKey));
+        request.setBizContent(AESUtil.decrypt(request.getBizContent(), symmetricKey));
         request.setLetter(null);
         return request;
     }
@@ -98,7 +99,7 @@ public class DigitLetterUtil {
         // 解密得到：对称密钥。
         String symmetricKey = RSAUtil.decrypt(response.getLetter(), privateKey);
         // AES对称密钥进行解密，得到内容明文。
-        response.setBizContent(AESUtil.decryptTo(response.getBizContent(), symmetricKey));
+        response.setBizContent(AESUtil.decrypt(response.getBizContent(), symmetricKey));
         response.setLetter(null);
         return response;
     }

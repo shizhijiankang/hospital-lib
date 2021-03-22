@@ -1,22 +1,33 @@
+/*
+ * Copyright 2019-2020 上海石指健康科技有限公司
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.sdrin.lib.hospital.util.encry;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-/**
- * 上海石指(健康)科技有限公司 sdrin.com 2020/6/15 6:42 下午
- *
- * @author 胡树铭
- */
 class AESUtilTest {
+
     @Test
-    void encryptAndDecry() {
-        String key = "123你好";
-        String plainText = "上海石指abc12";
+    void encrypt() {
+        String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
 
-        String enctypt = AESUtil.encrypt(plainText, key);
-        assertTrue(AESUtil.decryptTo(enctypt, key).equals(plainText));
+        String encty = AESUtil.encrypt("中国123abc", symmetricKey);
+
+        System.out.println("中国123abc".equals(AESUtil.decrypt(encty,symmetricKey)));
+
     }
-
 }

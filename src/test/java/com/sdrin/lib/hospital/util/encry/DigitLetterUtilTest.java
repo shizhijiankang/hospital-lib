@@ -16,8 +16,8 @@
 
 package com.sdrin.lib.hospital.util.encry;
 
-import com.sdrin.lib.hospital.domain.SHttpRequest;
-import com.sdrin.lib.hospital.domain.SHttpResponse;
+import com.sdrin.lib.hospital.domain.http.SHttpRequest;
+import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import com.sdrin.lib.hospital.util.json.JsonUtil;
 import org.junit.jupiter.api.Test;
 

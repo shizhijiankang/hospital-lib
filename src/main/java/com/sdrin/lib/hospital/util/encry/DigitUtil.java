@@ -16,8 +16,8 @@ limitations under the License.
 package com.sdrin.lib.hospital.util.encry;
 
 import com.sdrin.lib.hospital.config.Constant;
-import com.sdrin.lib.hospital.domain.SHttpRequest;
-import com.sdrin.lib.hospital.domain.SHttpResponse;
+import com.sdrin.lib.hospital.domain.http.SHttpRequest;
+import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 
 /**
  * 上海石指(健康)科技有限公司 sdrin.com 2020/6/15 7:55 下午

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sdrin.lib.hospital.domain;
+package com.sdrin.lib.hospital.domain.http;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

@@ -16,8 +16,8 @@ limitations under the License.
 package com.sdrin.lib.hospital.util.encry;
 
 import com.sdrin.lib.hospital.domain.RSAKeyType;
-import com.sdrin.lib.hospital.domain.SHttpRequest;
-import com.sdrin.lib.hospital.domain.SHttpResponse;
+import com.sdrin.lib.hospital.domain.http.SHttpRequest;
+import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;

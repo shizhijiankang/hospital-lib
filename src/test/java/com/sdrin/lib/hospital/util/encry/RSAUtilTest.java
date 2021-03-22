@@ -1,8 +1,8 @@
 package com.sdrin.lib.hospital.util.encry;
 
-import com.sdrin.lib.hospital.domain.CommonApiResponseDto;
-import com.sdrin.lib.hospital.domain.SHttpRequest;
-import com.sdrin.lib.hospital.domain.SHttpResponse;
+import com.sdrin.lib.hospital.domain.http.CommonApiResponseDto;
+import com.sdrin.lib.hospital.domain.http.SHttpRequest;
+import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import com.sdrin.lib.hospital.util.json.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,6 +52,21 @@ class RSAUtilTest {
         SHttpRequest request = new SHttpRequest("appId123", JsonUtil.toJson(bizContent), true, false);
         RSAUtil.sign(request, privateKeyPkcs8);
         System.out.println(request);
+        assertTrue(RSAUtil.verify(request, publicKey));
+    }
+
+    @Test
+    void fistEncryThenSignHttpRequest() {
+        Map<String, Object> bizContent = new HashMap<>();
+        bizContent.put("name", "name");
+        bizContent.put("value", 1);
+        SHttpRequest request = new SHttpRequest("appId123", JsonUtil.toJson(bizContent), true, false);
+        RSAUtil.sign(request, privateKeyPkcs8);
+        // 加密
+        request = DigitLetterUtil.encrypt(request, publicKey);
+        System.out.println(request);
+        // 先解密
+        DigitLetterUtil.decrypt(request, privateKeyPkcs8);
         assertTrue(RSAUtil.verify(request, publicKey));
     }
 
