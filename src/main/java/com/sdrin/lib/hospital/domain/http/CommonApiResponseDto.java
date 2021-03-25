@@ -42,6 +42,11 @@ public enum CommonApiResponseDto {
     ERR_BIZ_CONTENT("20105", "业务内容缺少或错误"),
     ERR_LETTER("20106", "加密信封缺少或错误"),
     ERR_ENC_TYPE("20107", "加密类型缺少或错误"),
+    ERR_WORK_NO_TYPE("20108", "缺少医生工号或错误"),
+    ERR_DEVICE_ID_TYPE("20109", "缺少设备编号或错误"),
+    HAS_NOT_LOGIN_DEVICE("20110", "请先登陆设备"),
+
+
     OTHER("20900", ""),
     UNTHOWN("99999", "未知异常"),
     ;

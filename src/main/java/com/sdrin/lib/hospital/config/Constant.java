@@ -25,13 +25,13 @@ public class Constant {
     /**
      * rsa api交互时，加密的类型
      */
-    public static final String ENC_TYPE = "AES+RSA2";
+    public static final String ENC_TYPE = "AES+RSA";
 
     /**
      * 数字签名的技术。
      */
     public static final String HTTP_VERSION = "1.0";
-    public static final String SIGN_TYPE = "SHA3+RSA2";
+    public static final String SIGN_TYPE = "MD5+RSA";
     public static final String LOCAL_DATE_FORMAT = "yyyy-MM-dd";
     public static final String LOCAL_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String LOCAL_TIME_FORMAT = "H:m";
