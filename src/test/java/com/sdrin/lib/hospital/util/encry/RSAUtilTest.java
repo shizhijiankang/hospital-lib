@@ -1,6 +1,7 @@
 package com.sdrin.lib.hospital.util.encry;
 
 import com.sdrin.lib.hospital.domain.http.CommonApiResponseDto;
+import com.sdrin.lib.hospital.domain.http.DHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import com.sdrin.lib.hospital.util.json.JsonUtil;
@@ -38,13 +39,6 @@ class RSAUtilTest {
     }
 
     @Test
-    void signWithSha3AndRsa256AndVerify() {
-        String sign = RSAUtil.signWithSha3AndRsa256(privateKeyPkcs8, plainText);
-        System.out.println(sign);
-        assertTrue(RSAUtil.verifyWithSha3AndRsa256(publicKey, plainText, sign));
-    }
-
-    @Test
     void signHttpRequest() {
         Map<String, Object> bizContent = new HashMap<>();
         bizContent.put("name", "name");
@@ -56,6 +50,19 @@ class RSAUtilTest {
     }
 
     @Test
+    void signDHttpRequest() {
+        Map<String, Object> bizContent = new HashMap<>();
+        bizContent.put("name", "name");
+        bizContent.put("value", 1);
+        DHttpRequest request = new DHttpRequest("appId123", "projectId", JsonUtil.toJson(bizContent), true, false);
+
+        RSAUtil.sign(request, privateKeyPkcs8);
+        System.out.println(request);
+        assertTrue(RSAUtil.verify(request, publicKey));
+    }
+
+
+    @Test
     void fistEncryThenSignHttpRequest() {
         Map<String, Object> bizContent = new HashMap<>();
         bizContent.put("name", "name");
@@ -63,7 +70,7 @@ class RSAUtilTest {
         SHttpRequest request = new SHttpRequest("appId123", JsonUtil.toJson(bizContent), true, false);
         RSAUtil.sign(request, privateKeyPkcs8);
         // 加密
-        request = DigitLetterUtil.encrypt(request, publicKey);
+        request = (SHttpRequest) DigitLetterUtil.encrypt(request, publicKey);
         System.out.println(request);
         // 先解密
         DigitLetterUtil.decrypt(request, privateKeyPkcs8);

@@ -16,6 +16,7 @@
 
 package com.sdrin.lib.hospital.util.encry;
 
+import com.sdrin.lib.hospital.domain.http.BaseHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -42,7 +43,7 @@ public class DigitLetterUtil {
      * @param openPublicKey 对方给的共享的公钥。
      * @return 返回做了数字信封的对象。
      */
-    public static SHttpRequest encrypt(SHttpRequest request, byte[] openPublicKey) {
+    public static BaseHttpRequest encrypt(BaseHttpRequest request, byte[] openPublicKey) {
         // 生成对称密钥。
         String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
         // AES对称密钥进行加密，生成密文
@@ -79,7 +80,7 @@ public class DigitLetterUtil {
      * @param privateKey rsa私钥
      * @return 返回解密后内容。
      */
-    public static SHttpRequest decrypt(SHttpRequest request, byte[] privateKey) {
+    public static BaseHttpRequest decrypt(BaseHttpRequest request, byte[] privateKey) {
         // 解密得到：对称密钥。
         String symmetricKey = RSAUtil.decrypt(request.getLetter(), privateKey);
         // AES对称密钥进行解密，得到内容明文。

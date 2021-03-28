@@ -25,6 +25,7 @@ package com.sdrin.lib.hospital.domain.http;
  * 加密的规则：如果 {@link SHttpRequest#getEncType()} 则必须加密，否则报错
  * 如果需要rsa签名和加密，则此为返回的reponse body，
  * 可以参考：http://simulate-his.sdrin.com/docs/index.html#_4_数字签名和数据加密
+ * 这个对象可以his，device一起使用
  *
  * @author 胡树铭
  */

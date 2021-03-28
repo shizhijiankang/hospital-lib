@@ -46,7 +46,6 @@ public enum CommonApiResponseDto {
     ERR_DEVICE_ID_TYPE("20109", "缺少设备编号或错误"),
     HAS_NOT_LOGIN_DEVICE("20110", "请先登陆设备"),
 
-
     OTHER("20900", ""),
     UNTHOWN("99999", "未知异常"),
     ;

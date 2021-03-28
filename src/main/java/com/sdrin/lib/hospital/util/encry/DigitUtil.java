@@ -16,6 +16,8 @@ limitations under the License.
 package com.sdrin.lib.hospital.util.encry;
 
 import com.sdrin.lib.hospital.config.Constant;
+import com.sdrin.lib.hospital.domain.http.BaseHttpRequest;
+import com.sdrin.lib.hospital.domain.http.DHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 
@@ -36,13 +38,23 @@ public class DigitUtil {
      * @param request 被做摘要的参数
      * @return 返回摘要后的内容，string
      */
-    public static String digit(SHttpRequest request) {
+    public static String digit(BaseHttpRequest request) {
         // 按照字典排序。
-        StringBuffer content = new StringBuffer("appId=")
-                .append(request.getAppId())
-                .append("&bizContent=")
-                .append(request.getBizContent());
-
+        StringBuffer content = new StringBuffer();
+        if (request instanceof SHttpRequest) {
+            content = new StringBuffer("appId=")
+                    .append(((SHttpRequest) request).getAppId())
+                    .append("&bizContent=")
+                    .append(request.getBizContent());
+        }
+        if (request instanceof DHttpRequest) {
+            content = new StringBuffer("deviceId=")
+                    .append(((DHttpRequest) request).getDeviceId())
+                    .append("&projectId=")
+                    .append(((DHttpRequest) request).getProjectId())
+                    .append("&bizContent=")
+                    .append(request.getBizContent());
+        }
         if (request.getEncType() != null && request.getEncType().equalsIgnoreCase(Constant.ENC_TYPE)) {
             content.append("&encType=")
                     .append(Constant.ENC_TYPE)

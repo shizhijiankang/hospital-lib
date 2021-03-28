@@ -44,7 +44,7 @@ class DigitLetterUtilTest {
         map.put("abc", "你好");
         sHttpRequest.setBizContent(JsonUtil.toJson(map));
         DigitLetterUtil.encrypt(sHttpRequest, rsaKeys.get(PUBLIC_KEY));
-        SHttpRequest result = DigitLetterUtil.decrypt(sHttpRequest, rsaKeys.get(PRIVATE_KEY_PKCS8));
+        SHttpRequest result = (SHttpRequest) DigitLetterUtil.decrypt(sHttpRequest, rsaKeys.get(PRIVATE_KEY_PKCS8));
         assertEquals(sHttpRequest, result);
     }
 

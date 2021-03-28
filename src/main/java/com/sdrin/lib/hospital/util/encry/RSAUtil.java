@@ -16,6 +16,8 @@ limitations under the License.
 package com.sdrin.lib.hospital.util.encry;
 
 import com.sdrin.lib.hospital.domain.RSAKeyType;
+import com.sdrin.lib.hospital.domain.http.BaseHttpRequest;
+import com.sdrin.lib.hospital.domain.http.DHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpRequest;
 import com.sdrin.lib.hospital.domain.http.SHttpResponse;
 import org.bouncycastle.asn1.ASN1Encodable;
@@ -174,7 +176,7 @@ public class RSAUtil {
      * @param request    被数字签名前的请求body
      * @param privateKey 私钥
      */
-    public static void sign(SHttpRequest request, byte[] privateKey) {
+    public static void sign(BaseHttpRequest request, byte[] privateKey) {
         // 此数字签名后的密文。
         String signed = RsaHelper.sign(DigitUtil.digit(request), Base64.encodeToString(privateKey));
         request.setSign(signed);
@@ -187,7 +189,7 @@ public class RSAUtil {
      * @param publicKey 发送方共享的公钥，非己方生成的公钥
      * @return 如果验证通过，却是是发送方，则返回true，否则false
      */
-    public static boolean verify(SHttpRequest request, byte[] publicKey) {
+    public static boolean verify(BaseHttpRequest request, byte[] publicKey) {
         return RsaHelper.verify(DigitUtil.digit(request), Base64.encodeToString(publicKey), request.getSign());
     }
 
