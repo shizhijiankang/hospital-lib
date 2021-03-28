@@ -19,6 +19,8 @@ package com.sdrin.lib.hospital.util.encry;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
+
 class AESUtilTest {
 
     @Test
@@ -27,7 +29,26 @@ class AESUtilTest {
 
         String encty = AESUtil.encrypt("中国123abc", symmetricKey);
 
-        System.out.println("中国123abc".equals(AESUtil.decrypt(encty,symmetricKey)));
+        System.out.println("中国123abc".equals(AESUtil.decrypt(encty, symmetricKey)));
 
+    }
+
+    @Test
+    void encryptByte() {
+        String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
+        byte[] Data = new byte[]{34, 35, 36, 37, 37, 37, 67, 68, 69};
+        byte[] b = new byte[0];
+        try {
+            b = AESUtil.encryptByte(Data, symmetricKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        byte[] d = new byte[0];
+        try {
+            d = AESUtil.decryptByte(b, symmetricKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(java.util.Arrays.toString(d));
     }
 }

@@ -8,7 +8,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -24,6 +24,7 @@ public class AESUtil {
      */
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
+    public static final int blockSize = 64;
 
     public static byte[] encryptToBytes(String plain_text, String key) {
         if (plain_text == null || key == null) return null;
@@ -125,6 +126,88 @@ public class AESUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    // 对文件进行加密，解密
+
+    /**
+     * 对文件进行加密
+     *
+     * @param fis 传进来的文件
+     * @param key 密钥
+     * @return 返回
+     */
+    public static void encryptFile(InputStream fis, OutputStream outputStream, String key) {
+        Cipher cipher;
+        byte[] buffer = new byte[blockSize];
+        int bytesRead;
+        try {
+            cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM), new IvParameterSpec(new byte[16]));
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                byte[] output = cipher.update(buffer, 0, bytesRead);
+                if (output != null) {
+                    outputStream.write(output);
+                }
+            }
+            byte[] outputBytes = cipher.doFinal();
+            if (outputBytes != null) {
+                outputStream.write(outputBytes);
+            }
+            fis.close();
+            outputStream.close();
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IOException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * 对文件进行解密
+     *
+     * @param fis 传进来的文件，加密过的文件
+     * @param key 密钥
+     * @return 返回源文件
+     */
+    public static void decryptFile(InputStream fis, OutputStream outputStream, String key) {
+        Cipher cipher;
+        byte[] buffer = new byte[blockSize];
+        int bytesRead;
+        try {
+            cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM), new IvParameterSpec(new byte[16]));
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                byte[] output = cipher.update(buffer, 0, bytesRead);
+                if (output != null) {
+                    outputStream.write(output);
+                }
+            }
+            byte[] outputBytes = cipher.doFinal();
+            if (outputBytes != null) {
+                outputStream.write(outputBytes);
+            }
+            fis.close();
+            outputStream.close();
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IOException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static byte[] encryptByte(byte[] data, String key) throws Exception {
+        Cipher cipher;
+        cipher = Cipher.getInstance(TRANSFORMATION);
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM), new IvParameterSpec(new byte[16]));
+        byte[] encVal = cipher.doFinal(data);
+        return encVal;
+    }
+    public static byte[] decryptByte(byte[] Data, String key) throws Exception {
+        Cipher cipher;
+        cipher = Cipher.getInstance(TRANSFORMATION);
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM), new IvParameterSpec(new byte[16]));
+        byte[] encVal = cipher.doFinal(Data);
+        return encVal;
     }
 
 }
