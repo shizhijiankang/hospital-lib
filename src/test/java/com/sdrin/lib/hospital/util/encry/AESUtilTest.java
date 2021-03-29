@@ -51,4 +51,19 @@ class AESUtilTest {
         }
         System.out.println(java.util.Arrays.toString(d));
     }
+
+    @Test
+    void e() throws Exception {
+        String key = "8so5m3uX1vjtqpd7";
+        String plain = "aZPjcfhrJ5CvTzNobjCK7eZD7lGPLm7B";
+        byte[] plainBytes = plain.getBytes(StandardCharsets.UTF_8);
+        byte[] s = AESUtil.encryptByte(plainBytes, key);
+
+        byte[] aa = AESUtil.decryptByte(s, key);
+        String s2 = new String(aa, StandardCharsets.UTF_8);
+        System.out.println(s2);
+
+        System.out.println(s2.equals(plain));
+
+    }
 }

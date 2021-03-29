@@ -1,14 +1,15 @@
 package com.sdrin.lib.hospital.util.encry;
 
-//import org.bouncycastle.util.encoders.Hex;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -26,19 +27,37 @@ public class AESUtil {
     private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
     public static final int blockSize = 64;
 
-//    public static byte[] encryptToBytes(String plain_text, String key) {
-//        if (plain_text == null || key == null) return null;
-//        try {
-//            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-//            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM));
-//            return cipher.doFinal(plain_text.getBytes(CHARSET));
-//            /*return new BASE64Encoder().encode(bytes);*/
-//        } catch (NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException | UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//
-//    }
+    public static String e(String plain_text, String key) {
+        Cipher cipher;
+        try {
+            cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM),
+                    new IvParameterSpec(new byte[16]));
+            byte[] cipherText = cipher.doFinal(plain_text.getBytes());
+            return Base64.encodeToString(cipherText).replaceAll("[\\s*\t\n\r]", "");
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | UnsupportedEncodingException |
+                InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException |
+                BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String d(String cipherText, String key) {
+        Cipher cipher;
+        try {
+            cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM),
+                    new IvParameterSpec(new byte[16]));
+            byte[] plainText = cipher.doFinal(Base64.decode(cipherText));
+            return new String(plainText);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | UnsupportedEncodingException |
+                InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException |
+                BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static String encrypt(String plain_text, String key) {
         Cipher cipher = null;
@@ -74,21 +93,6 @@ public class AESUtil {
         }
         return Base64.encodeToString(results, Base64.DEFAULT); // it returns the result as a String
     }
-
-//    public static byte[] decryptToBytes(String cipherText, String key) {
-//        if (cipherText == null || key == null) return null;
-//        try {
-//            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-//            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(CHARSET), ALGORITHM));
-//            byte[] bytes = Base64.decode(cipherText, Base64.DEFAULT);
-//            /*byte[] bytes = Base64.decode(cipherText);*/ //Base64方法
-//            /*byte[] bytes = new BASE64Decoder().decodeBuffer(str);*/
-//            return cipher.doFinal(bytes);
-//        } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException | UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     public static String decrypt(String cipherText, String key) {
         Cipher cipher = null; //this parameters should not be changed
