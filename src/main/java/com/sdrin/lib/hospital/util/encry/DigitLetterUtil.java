@@ -44,13 +44,15 @@ public class DigitLetterUtil {
      * @return 返回做了数字信封的对象。
      */
     public static BaseHttpRequest encrypt(BaseHttpRequest request, byte[] openPublicKey) {
-        // 生成对称密钥。
-        String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
-        // AES对称密钥进行加密，生成密文
-        request.setBizContent(AESUtil.encrypt(request.getBizContent(), symmetricKey));
-        // 利用随机数+RSA做信封
-        //公钥加密对称密钥，生成数字信封
-        request.setLetter(RSAUtil.encrypt(symmetricKey, openPublicKey));
+        if (request.getBizContent() != null) {
+            // 生成对称密钥。
+            String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
+            // AES对称密钥进行加密，生成密文
+            request.setBizContent(AESUtil.encrypt(request.getBizContent(), symmetricKey));
+            // 利用随机数+RSA做信封
+            //公钥加密对称密钥，生成数字信封
+            request.setLetter(RSAUtil.encrypt(symmetricKey, openPublicKey));
+        }
         return request;
     }
 
@@ -63,13 +65,15 @@ public class DigitLetterUtil {
      * @return 返回做了数字信封的对象。
      */
     public static SHttpResponse encrypt(SHttpResponse response, byte[] openPublicKey) {
-        // 生成对称密钥。
-        String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
-        // AES对称密钥进行加密，生成密文
-        response.setBizContent(AESUtil.encrypt(response.getBizContent(), symmetricKey));
-        // 利用随机数+RSA做信封
-        //公钥加密对称密钥，生成数字信封
-        response.setLetter(RSAUtil.encrypt(symmetricKey, openPublicKey));
+        if (response.getBizContent() != null) {
+            // 生成对称密钥。
+            String symmetricKey = RandomStringUtils.randomAlphanumeric(16);
+            // AES对称密钥进行加密，生成密文
+            response.setBizContent(AESUtil.encrypt(response.getBizContent(), symmetricKey));
+            // 利用随机数+RSA做信封
+            //公钥加密对称密钥，生成数字信封
+            response.setLetter(RSAUtil.encrypt(symmetricKey, openPublicKey));
+        }
         return response;
     }
 
@@ -81,11 +85,13 @@ public class DigitLetterUtil {
      * @return 返回解密后内容。
      */
     public static BaseHttpRequest decrypt(BaseHttpRequest request, byte[] privateKey) {
-        // 解密得到：对称密钥。
-        String symmetricKey = RSAUtil.decrypt(request.getLetter(), privateKey);
-        // AES对称密钥进行解密，得到内容明文。
-        request.setBizContent(AESUtil.decrypt(request.getBizContent(), symmetricKey));
-        request.setLetter(null);
+        if (request.getBizContent() != null) {
+            // 解密得到：对称密钥。
+            String symmetricKey = RSAUtil.decrypt(request.getLetter(), privateKey);
+            // AES对称密钥进行解密，得到内容明文。
+            request.setBizContent(AESUtil.decrypt(request.getBizContent(), symmetricKey));
+            request.setLetter(null);
+        }
         return request;
     }
 
@@ -97,11 +103,13 @@ public class DigitLetterUtil {
      * @return 返回解密后内容。
      */
     public static SHttpResponse decrypt(SHttpResponse response, byte[] privateKey) {
-        // 解密得到：对称密钥。
-        String symmetricKey = RSAUtil.decrypt(response.getLetter(), privateKey);
-        // AES对称密钥进行解密，得到内容明文。
-        response.setBizContent(AESUtil.decrypt(response.getBizContent(), symmetricKey));
-        response.setLetter(null);
+        if (response.getBizContent() != null) {
+            // 解密得到：对称密钥。
+            String symmetricKey = RSAUtil.decrypt(response.getLetter(), privateKey);
+            // AES对称密钥进行解密，得到内容明文。
+            response.setBizContent(AESUtil.decrypt(response.getBizContent(), symmetricKey));
+            response.setLetter(null);
+        }
         return response;
     }
 }
